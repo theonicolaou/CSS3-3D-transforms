@@ -1,0 +1,267 @@
+<html>
+	<head>
+		<style>
+			body {
+				background-color: #fff;
+			}
+
+			.stage {
+				width: 450px;
+				height: 450px;
+				-webkit-perspective: 1600px;
+				-webkit-perspective-origin: 50% -240px;	
+				margin: 0px auto;
+				/*background-color: #fff;*/
+			}
+			figure {
+				display: block;
+				position: absolute;
+				width: 300px;
+				height: 300px;
+				background-color: #60c2ef;
+				-webkit-transform-origin: 50% 50% 0;
+				overflow: hidden;
+				-webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(RGBA(0,0,0,0.1)));
+			}
+			figure:before, figure:after {
+				content: "";
+				display: block;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+			}
+			figure:before {
+				background: -webkit-radial-gradient(top left, rgba(0,0,0,0.5), #000000);
+			}
+			figure:after {
+				background: -webkit-radial-gradient(top right, rgba(0,0,0,0.5), #000000);
+			}
+
+			.cube {
+				-webkit-transform-style: preserve-3d;
+				-webkit-animation: rotate 10s infinite linear;
+				-webkit-transition: all 0.5s ease;
+			}
+
+			.cube:hover {
+				-webkit-transform: rotateY(-50deg);
+				-webkit-transition: all 0.4s ease;
+			}
+			.cube:hover figure.right:before, .cube:hover figure.front:before {
+				opacity: 0.2;
+				-webkit-transition: all 0.4s ease;
+			}
+			.front {
+				-webkit-transform: translateZ(150px);
+				background-color: blue;
+			}
+
+			.front:before {
+				-webkit-animation: frontShading1 10s infinite linear;
+				opacity: 0.1;
+				-webkit-transition: all 0.4s ease;
+			}
+			.front:after {
+				-webkit-animation: frontShading2 10s infinite linear;
+				display: none;
+			}
+			.back {
+				-webkit-transform: rotateY(180deg) translateZ(150px);
+				background-color: green;
+			}
+			.back:before {
+				-webkit-animation: backShading2 10s infinite linear;
+			}
+
+			.back:after {
+				-webkit-animation: backShading1 10s infinite linear;
+			}
+			.top {
+				-webkit-transform: rotateX(90deg) translateZ(150px);
+				-webkit-box-reflect: none;
+				background-color: yellow;
+			}
+			.top:after {
+				opacity: 0.5;
+				width: 200%;
+				height: 200%;
+				margin-left: -50%;
+				margin-top: -50%;
+				background: -webkit-raidal-gradient(bottom, rgba(0,0,0,0), #000000);
+				-webkit-animation: rotateTop 10s infinite linear;
+			}
+			.bottom {
+				-webkit-transform: rotateX(-90deg) translateZ(150px);
+				-webkit-box-shadow: 0 10px 100px rgba(0,0,0.7);
+				-webkit-box-reflect: none;
+				background-color: pink;
+			}
+			.left {
+				-webkit-transform: rotateY(-90deg) translateZ(150px);
+				background-color: #ff0066;
+			}
+			.left:before {
+				-webkit-animation: leftShading1 10s infinite linear;
+			}
+			.left:after {
+				-webkit-animation: leftShading2 10s infinite linear;
+			}
+			.right {
+				-webkit-transform: rotateY(90deg) translateZ(150px);
+				background-color: orange;
+			}
+
+			.right:before {
+				-webkit-animation: rightShading1 10s infinite linear;
+				opacity: 0.4;
+				-webkit-transition: all 0.4s ease;
+			}
+
+			.right:after {
+				-webkit-animation: rightShading2 10s infinite linear;
+				display: none;
+			}
+
+			/** animations **/
+		@-webkit-keyframes rotate {
+		  0% {
+		    -webkit-transform: rotateY(0);
+		  }
+		  100% {
+		    -webkit-transform: rotateY(360deg);
+		  }
+		}
+		@-webkit-keyframes frontShading1 {
+		  2% {
+		    opacity: 0;
+		  }
+		  25% {
+		    opacity: 0.8;
+		  }
+		  35% {
+		    opacity: 0.8;
+		  }
+		  50% {
+		    opacity: 0;
+		  }
+		}
+		@-webkit-keyframes frontShading2 {
+		  50% {
+		    opacity: 0;
+		  }
+		  60% {
+		    opacity: 0.8;
+		  }
+		  75% {
+		    opacity: 0.8;
+		  }
+		  100% {
+		    opacity: 0;
+		  }
+		}
+		@-webkit-keyframes backShading1 {
+		  25% {
+		    opacity: 0.8;
+		  }
+		  50% {
+		    opacity: 0;
+		  }
+		  75% {
+		    opacity: 0;
+		  }
+		  80% {
+		    opacity: 0.8;
+		  }
+		}
+		@-webkit-keyframes backShading2 {
+		  25% {
+		    opacity: 0;
+		  }
+		  50% {
+		    opacity: 0;
+		  }
+		  75% {
+		    opacity: 0.8;
+		  }
+		  80% {
+		    opacity: 0.8;
+		  }
+		}
+		@-webkit-keyframes leftShading1 {
+		  0% {
+		    opacity: 0;
+		  }
+		  25% {
+		    opacity: 0;
+		  }
+		  50% {
+		    opacity: 0.8;
+		  }
+		  60% {
+		    opacity: 0.8;
+		  }
+		}
+		@-webkit-keyframes leftShading2 {
+		  0% {
+		    opacity: 0.8;
+		  }
+		  25% {
+		    opacity: 0;
+		  }
+		  50% {
+		    opacity: 0;
+		  }
+		  100% {
+		    opacity: 0.8;
+		  }
+		}
+		@-webkit-keyframes rightShading2 {
+		  50% {
+		    opacity: 0.8;
+		  }
+		  75% {
+		    opacity: 0;
+		  }
+		  100% {
+		    opacity: 0;
+		  }
+		}
+		@-webkit-keyframes rightShading1 {
+		  10% {
+		    opacity: 0.8;
+		  }
+		  50% {
+		    opacity: 0;
+		  }
+		  75% {
+		    opacity: 0;
+		  }
+		  100% {
+		    opacity: 0.8;
+		  }
+		}
+
+		@-webkit-keyframes rotateTop {
+			0% {
+				-webkit-transform: rotateZ(0);
+			}
+			100% {
+				-webkit-transform: rotateZ(360deg);
+			}
+		}
+		</style>
+	</head>
+		<body>
+			<div class="stage">
+				<div class="cube">
+					<figure class="back">BACK</figure>
+					<figure class="top">TOP</figure>
+					<figure class="bottom"></figure>
+					<figure class="left">LEFT</figure>
+					<figure class="right">RIGHT</figure>
+					<figure class="front">FRONT</figure>
+				</div>
+			</div>
+		<body>
+</html>
